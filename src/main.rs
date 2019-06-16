@@ -1,13 +1,8 @@
 fn main() {
     println!("");
     let mut vec:Vec<Vec<i32>> = Vec::new();
-    for i in 0..4 {vec.push(vec![0,0,0,0])};
+    for _i in 0..4 {vec.push(vec![0,0,0,0])};
     
-    
-    for i in 0 .. vec.len(){
-        println!("{:?}",vec[i]);
-       // vec[i][2] = 3;
-    }
     
     nqueens(&mut vec,0);
     
@@ -19,11 +14,25 @@ fn main() {
 /*
     ToDo Check if peice is attacked
 */
-fn attacked()->bool{
-    return true;
+fn attacked(input:&Vec<Vec<i32>>,row:i32,col:i32)-> bool {
+   
+
+    for i in 0..input.len() {
+
+        for j in 0..input.len() {
+            if input[i][j] == 1 {
+                if i == col as usize || j == row as usize {
+                    return true
+                }
+            }
+        }
+        
+    }
+
+    return false;
 }
 
-fn nqueens( input:&mut Vec<Vec<i32>>,mut col:i32)-> bool{
+fn nqueens( input:&mut Vec<Vec<i32>>,col:i32)-> bool{
     if col == input.len() as i32 {
         return true;
     }
