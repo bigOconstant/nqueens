@@ -5,7 +5,7 @@ fn main() {
     
     
     nqueens(&mut vec,0);
-    
+    attacked(&vec,2,3);
    
 
     println!("{:?}",vec);
@@ -22,6 +22,9 @@ fn attacked(input:&Vec<Vec<i32>>,row:i32,col:i32)-> bool {
         for j in 0..input.len() {
             if input[i][j] == 1 {
                 if i == col as usize || j == row as usize {
+                    return true
+                }
+                if (row - col) == (j as i32) - (i as i32) || (row + col) == ((j as i32)+(i as i32)) {
                     return true
                 }
             }
