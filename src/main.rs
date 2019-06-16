@@ -1,7 +1,7 @@
 fn main() {
     println!("finding n queens");
     let mut vec:Vec<Vec<i32>> = Vec::new();
-    let sizeofvec = 4;
+    let sizeofvec = 10;
     for _i in 0..sizeofvec {
         let mut minivec = Vec::new();
         for j in 0..sizeofvec {
@@ -10,16 +10,24 @@ fn main() {
         vec.push(minivec);
     };
     
-    
-    nqueens(&mut vec,0);
- 
+    let mut found = 0;
+    nqueens(&mut vec,0,&mut found);
+
+    println!("found: {} nqueen combinations",found);
    
-    for i in 0..sizeofvec {
-        println!("{:?}",vec[i]);
-    }
+
 
 
 }
+
+fn printqueens(input:&Vec<Vec<i32>>){
+    println!("  ");
+    for i in input {
+        println!("{:?}",i);
+    }
+    
+}
+
 /*
      Checks if peice is attacked
 */
@@ -58,7 +66,7 @@ fn countqueens(input:&Vec<Vec<i32>>)-> i32 {
 }
 
 
-fn nqueens( input:&mut Vec<Vec<i32>>,row:i32)-> bool{
+fn nqueens( input:&mut Vec<Vec<i32>>,row:i32, found:&mut i32)-> bool{
     if row == (input.len() + 1) as i32 {
         return false;
     }
@@ -67,7 +75,7 @@ fn nqueens( input:&mut Vec<Vec<i32>>,row:i32)-> bool{
         
         if !attackedme{
             input[row as usize][i as usize] = 1;
-            if !nqueens(input,row+1){
+            if !nqueens(input,row+1,found){
                 
                 
                 input[row as usize][i as usize] = 0;
@@ -77,7 +85,8 @@ fn nqueens( input:&mut Vec<Vec<i32>>,row:i32)-> bool{
      
 
     if countqueens(input) == input.len() as i32 {
-            return true;
+        *found = *found +1;
+       // printqueens(input);
     }
     false
 
