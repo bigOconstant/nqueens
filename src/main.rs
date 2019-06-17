@@ -79,10 +79,8 @@ fn printqueens(input:&Vec<Vec<i32>>){
 // Counts the number of queens on the board
 fn countqueens(input:&Vec<Vec<i32>>)-> i32 {
     let mut count:i32 = 0;
-    for row in input.iter(){
-        for col in row.iter(){
-            if *col == 1 as i32 {count = count +1}
-        }
+    for elem in input.iter().flatten(){
+        if *elem == 1 as i32 {count = count +1}
     };
     count
 }
